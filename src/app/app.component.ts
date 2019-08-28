@@ -39,8 +39,9 @@ export class AppComponent implements OnInit {
 
   private fetchPosts() {
     this.http
-    .get('https://angular-http-requests-cb030.firebaseio.com/posts.json')
-    .pipe(map((responseData: {[key: string]: Post }) => {
+    .get<{[key: string]: Post }>('https://angular-http-requests-cb030.firebaseio.com/posts.json')
+    .pipe(
+      map(responseData => {
       const postsArray: Post[] = [];
       for (const key in responseData) {
         if (responseData.hasOwnProperty(key)) {
