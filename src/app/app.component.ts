@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     this.http
-      .post(
+      .post<{ name: string }>(
         'https://angular-http-requests-cb030.firebaseio.com/posts.json',
         postData
       )
