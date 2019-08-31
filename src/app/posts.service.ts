@@ -60,7 +60,8 @@ export class PostsService {
     deletePosts() {
        return this.http.delete('https://angular-http-requests-cb030.firebaseio.com/posts.json',
        {
-         observe: 'events'
+         observe: 'events',
+         responseType: 'json'
        })
        .pipe(
          tap(event => {
