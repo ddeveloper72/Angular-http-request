@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 
 import { Post } from './post.model';
 import { Subject, throwError } from 'rxjs';
@@ -58,6 +58,14 @@ export class PostsService {
     }
 
     deletePosts() {
-       return this.http.delete('https://angular-http-requests-cb030.firebaseio.com/posts.json');
+       return this.http.delete('https://angular-http-requests-cb030.firebaseio.com/posts.json',
+       {
+         observe: 'events'
+       })
+       .pipe(
+         tap(event => {
+           console.log(event);
+         })
+       );
     }
 }
