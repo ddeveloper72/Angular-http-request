@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpEventType } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 
 import { Post } from './post.model';
@@ -65,6 +65,12 @@ export class PostsService {
        .pipe(
          tap(event => {
            console.log(event);
+           if (event.type === HttpEventType.Sent) {
+             // ...
+           }
+           if (event.type === HttpEventType.Response) {
+             console.log(event.body);
+           }
          })
        );
     }
